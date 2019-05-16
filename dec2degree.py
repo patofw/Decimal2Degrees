@@ -76,7 +76,22 @@ def dms2degree(latitude,longitude):
 
 
     return latitude, longitude
+
+def dms2degree_parsed(degrees,minutes,seconds, cardinal_letter): 
     
+    """ Transforms parsed DMS to decimals. Must include cadinal point letter"""
+    
+    cardinal_letter = cardinal_letter.lower()
+
+    valid_cardinals = ["n","s","e","w"] 
+    if cardinal_letter in valid_cardinals: 
+             
+        dd = float(degrees) + float(minutes)/60 + float(seconds)/(60*60);
+        if (cardinal_letter == 'w') or (cardinal_letter == 's'):
+            dd = dd * -1
+        return dd
+    else: 
+        raise ValueError("Cardinal letters must be N,S,W or E")    
     
 ### Example #####
 
@@ -92,5 +107,7 @@ def dms2degree(latitude,longitude):
 #print(decs)
 ## prints ---> (70.18333333333334, -40.21666666666667)
     
-    
+##Example 
+##dms2degree_parsed(18,18,125,"W")
+## returns --> -18.3347222222
     
